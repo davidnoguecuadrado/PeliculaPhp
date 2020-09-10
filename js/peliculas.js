@@ -99,23 +99,25 @@ function add(){
 
 function get(){
 
-    indice = 0;
 
-    data = [{
-        id:"1",
-        Nombre:"PACO",
-        Fecha:"118"
-    }]
 
-    data.forEach(pelicula => {
-        $('#table').DataTable().row.add( [
-            indice,
-            pelicula.id,
-            pelicula.Nombre,
-            pelicula.Fecha,
-            "<button class='btn btn-danger mr-4' id='delete'>Eliminar</button> <button class='btn btn-warning mr-4' id='edit'>Editar</button>"
-        ] ).draw( false );
-        indice ++;
+    url=$(location).attr('href')+"Controlador\\getPeliculasControler.php";
+
+    $.post(url, function(data){
+        peliculas=$.parseJSON(data);
+        indice=1;
+        peliculas.forEach(pelicula => {
+            $('#table').DataTable().row.add( [
+                indice,
+                pelicula[0],
+                pelicula[1],
+                pelicula[2],
+                "<button class='btn btn-danger mr-4' id='delete'>Eliminar</button> <button class='btn btn-warning mr-4' id='edit'>Editar</button>"
+            ] ).draw( false );
+            indice ++;
+           console.log(pelicula);
+           indice ++;
+        });
     });
 }
 
