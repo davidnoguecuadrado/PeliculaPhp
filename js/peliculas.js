@@ -94,6 +94,19 @@ function editar(){
 function add(){
 
 
+    
+    url=$(location).attr('href')+"Controlador\\addPeliculasControler.php";
+
+    $.post(url, {Nombre: $("#nombrePelicula").val(),Fecha:$("#fechaPelicula").val()}, function(result){
+        $('#table').DataTable().row.add( [
+            $('#table').DataTable().rows().count()+1,
+            result,
+            $("#nombrePelicula").val(),
+            $("#fechaPelicula").val(),
+            "<button class='btn btn-danger mr-4' id='delete'>Eliminar</button> <button class='btn btn-warning mr-4' id='edit'>Editar</button>"
+        ] ).draw( false );       
+    });
+
     $("#exampleModalLong").modal('hide');
 
 }

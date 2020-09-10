@@ -1,7 +1,7 @@
 <?php
     include (dirname(__DIR__).'\Modelo\conexion.php');
 
-    function getPeople(){
+    function getPelicula(){
         $conn=openConexion();
            
         $sql = 'SELECT * FROM peliculas';
@@ -13,7 +13,7 @@
         return json_encode($rows);
     }
 
-    function deletePeople($id){
+    function deletePelicula($id){
 
         $conn=openConexion();
         $sql = 'DELETE FROM peliculas WHERE id='.$id.';';
@@ -23,5 +23,18 @@
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
+    }
+
+    function addPelicula($Pelicula){
+
+        $conn=openConexion();
+           
+        $sql = 'INSERT INTO `peliculas` (`id`, `Nombre`, `Fecha`) VALUES (NULL,\''.$Pelicula['Nombre'].'\',\''.$Pelicula['Fecha'].'\');';
+    
+        $object=mysqli_query($conn, $sql);
+    
+        echo $conn->insert_id;
+    
+        closeConexion($conn);
     }
 ?>
