@@ -13,4 +13,15 @@
         return json_encode($rows);
     }
 
+    function deletePeople($id){
+
+        $conn=openConexion();
+        $sql = 'DELETE FROM peliculas WHERE id='.$id.';';
+
+        if (mysqli_query($conn, $sql)) {
+            echo "Delete";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
 ?>

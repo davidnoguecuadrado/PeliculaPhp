@@ -69,7 +69,9 @@ $(document).ready(function () {
 
 
 function eliminar(){
-
+    url=$(location).attr('href')+"Controlador\\deletePeliculasControler.php";
+    $.post(url, {id:idPelicula} ,function(data){
+    });
 }
 
 function editar(){
@@ -99,8 +101,6 @@ function add(){
 
 function get(){
 
-
-
     url=$(location).attr('href')+"Controlador\\getPeliculasControler.php";
 
     $.post(url, function(data){
@@ -114,8 +114,6 @@ function get(){
                 pelicula[2],
                 "<button class='btn btn-danger mr-4' id='delete'>Eliminar</button> <button class='btn btn-warning mr-4' id='edit'>Editar</button>"
             ] ).draw( false );
-            indice ++;
-           console.log(pelicula);
            indice ++;
         });
     });
