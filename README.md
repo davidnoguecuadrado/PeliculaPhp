@@ -1,4 +1,4 @@
-# PeliculasLaravel
+# Peliculas PHP
 
 ## Introduccion
 
