@@ -25,7 +25,6 @@ $(document).ready(function () {
 
         table = $('#table').DataTable();
         data = table.row($(this).closest("tr").get(0)).data();
-        console.log(data);
         row=$(this).closest("tr").get(0);
         idPelicula=data[1];
         indice=data[0];
@@ -75,20 +74,21 @@ function eliminar(){
 }
 
 function editar(){
-    
+
+    url=$(location).attr('href')+"Controlador\\updatePeliculasControler.php";
+
     $('#table').DataTable().row(row).remove().draw();
 
-    $('#table').DataTable().row.add( [
-        indice,
-        idPelicula,
-        $("#nombrePelicula").val(),
-        $("#fechaPelicula").val(),
-        "<button class='btn btn-danger mr-4' id='delete'>Eliminar</button> <button class='btn btn-warning mr-4' id='edit'>Editar</button>" 
-    ] ).draw( false );
-
-
-      $("#exampleModalLong").modal('hide');
-
+    $.post(url, {id:idPelicula,Nombre: $("#nombrePelicula").val(),Fecha:$("#fechaPelicula").val()}, function(result){
+        $('#table').DataTable().row.add( [
+            indice,
+            idPelicula,
+            $("#nombrePelicula").val(),
+            $("#fechaPelicula").val(),
+            "<button class='btn btn-danger mr-4' id='delete'>Eliminar</button> <button class='btn btn-warning mr-4' id='edit'>Editar</button>" 
+        ] ).draw( false );
+        $("#exampleModalLong").modal('hide');
+    });
 }
 
 function add(){

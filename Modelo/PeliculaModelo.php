@@ -23,6 +23,7 @@
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
+        closeConexion($conn);
     }
 
     function addPelicula($Pelicula){
@@ -36,5 +37,23 @@
         echo $conn->insert_id;
     
         closeConexion($conn);
+    }
+
+    function updatePeliculas($Pelicula){
+
+        
+        $conn=openConexion();
+        
+        $sql = 'UPDATE peliculas SET Nombre=\''.$_POST['Nombre'].'\', Fecha=\''.$_POST['Fecha'].'\' WHERE id='.$_POST['id'].';';
+
+
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
+        closeConexion($conn);
+
     }
 ?>
